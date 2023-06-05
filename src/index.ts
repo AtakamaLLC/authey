@@ -73,8 +73,8 @@ export function createAuthMiddleware(options: AuthConfig) {
       const parsedUrl = new URL(request.url)
       const [action] = parsedUrl.pathname.slice(prefix.length + 1).split('/')
 
-      if (
-        actions.includes(action as AuthAction)
+      if (req.method !== "OPTIONS" 
+        && actions.includes(action as AuthAction)
         && parsedUrl.pathname.startsWith(`${prefix}/`)
       ) {
         const response = await Auth(request, authOptions)
